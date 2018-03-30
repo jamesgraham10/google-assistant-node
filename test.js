@@ -1,10 +1,11 @@
-function getSpeechResponse(speechResponse) {
-  return {
-    speech: speechResponse
-  };
-}
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
 
-const app = require("express")();
+// helpers
+const { getSpeechResponse } = require("./helpers");
+
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.json({ status: "working!" });
