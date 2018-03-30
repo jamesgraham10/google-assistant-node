@@ -6,11 +6,11 @@ function getSpeechResponse(speechResponse) {
 
 const app = require("express")();
 
-app.get("/", () => {
+app.get("/", (req, res) => {
   res.json({ status: "working!" });
 });
 
-app.post("/", () => {
+app.post("/", (req, res) => {
   res.json(getSpeechResponse("Yo yo yo"));
 });
 
