@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 // helpers
-const { getSpeechResponse } = require("./helpers");
+const { sendSpeechResponse, getIntent } = require("./helpers");
 
 app.use(bodyParser.json());
 
@@ -12,8 +12,11 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
-  res.json(getSpeechResponse("Yo yo yo"));
+  const intent = getIntent(req.body.result);
+  const [entity, action] = intent.split(".");
+  res.json(
+    sendSpeechResponse(`I will look up entity ${entity} with action ${action}`)
+  );
 });
 
 app.listen(3000, () => {
